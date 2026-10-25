@@ -1,0 +1,72 @@
+{
+  "dataset": "mandarjoshi/trivia_qa",
+  "config": "unfiltered.nocontext",
+  "split": "train",
+  "seed": 42,
+  "n": 800,
+  "filter_config": {
+    "min_words": 4,
+    "max_words": 20,
+    "max_answer_words": 5
+  },
+  "rejections_by_first_failed_stage": {
+    "answer_too_long": 2626,
+    "multi_answer": 996,
+    "no_modifiable_feature": 9399,
+    "question_length": 11198,
+    "time_sensitive": 612,
+    "duplicate_question": 166
+  },
+  "funnel": [
+    {
+      "stage": "total_rows",
+      "remaining": 87622
+    },
+    {
+      "stage": "after_answer_missing",
+      "remaining": 87622
+    },
+    {
+      "stage": "after_answer_too_long",
+      "remaining": 84996
+    },
+    {
+      "stage": "after_question_length",
+      "remaining": 73798
+    },
+    {
+      "stage": "after_time_sensitive",
+      "remaining": 73186
+    },
+    {
+      "stage": "after_multi_answer",
+      "remaining": 72190
+    },
+    {
+      "stage": "after_no_modifiable_feature",
+      "remaining": 62791
+    },
+    {
+      "stage": "after_duplicate_question",
+      "remaining": 62625
+    },
+    {
+      "stage": "sampled",
+      "remaining": 800
+    }
+  ],
+  "selected_feature_counts": {
+    "entity": 765,
+    "number": 75,
+    "comparative": 125,
+    "year": 188,
+    "roman_numeral": 8,
+    "unit": 10
+  },
+  "selected_answer_type_counts": {
+    "WikipediaEntity": 722,
+    "FreeForm": 52,
+    "Numerical": 24,
+    "Range": 2
+  }
+}
