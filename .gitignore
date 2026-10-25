@@ -1,0 +1,8 @@
+# Virtual environment (recreate it with: py -3.10 -m venv .venv)
+.venv/
+
+# Python bytecode, created when the notebook imports build_source_questions.py
+__pycache__/
+
+# Jupyter autosave copies
+.ipynb_checkpoints/
