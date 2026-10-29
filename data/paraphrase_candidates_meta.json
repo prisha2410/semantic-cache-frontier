@@ -27,5 +27,25 @@
     "questions_with_1_passed": 117,
     "questions_with_2plus_passed": 662,
     "total_generation_seconds": 2339.9
+  },
+  "retry": {
+    "prompt": "Rewrite the question below once, in different words.\nRules:\n- Keep the exact meaning: the correct answer must stay the same.\n- Ask for the same thing as the original (the same person, object or place being asked about).\n- Keep every name, number, date and quoted phrase exactly as written.\n- Do not include the answer or any hint about it.\n- Do not write answer options, lists, or phrases like \"which of the following\" or \"which of these\".\n- The rewrite must be a question ending with \"?\".\n- It must be worded differently from the original and from every earlier rewrite listed below.\n- Write only the rewrite, with no numbering and no extra text.\n\nQuestion: {question}\n\nEarlier rewrites:\n{earlier}",
+    "rule": "questions with < 2 passing candidates; one rewrite per request, up to 4 requests, stop at 4 passing",
+    "generation": {
+      "do_sample": false,
+      "max_new_tokens": 100,
+      "dtype": "bfloat16"
+    },
+    "extra_filter": "duplicate of earlier rewrite",
+    "this_run_seconds": 341.4
+  },
+  "summary_after_retry": {
+    "questions": 795,
+    "candidates_total": 4056,
+    "candidates_passed": 3644,
+    "questions_with_0_passed": 10,
+    "questions_with_1_passed": 8,
+    "questions_with_2plus_passed": 777,
+    "total_generation_seconds": 2339.9
   }
 }
