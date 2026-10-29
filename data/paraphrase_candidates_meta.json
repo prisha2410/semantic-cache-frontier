@@ -1,0 +1,31 @@
+{
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "prompt": "Rewrite the question below in 5 different ways.\nRules:\n- Keep the exact meaning: the correct answer must stay the same.\n- Ask for the same thing as the original (the same person, object or place being asked about).\n- Keep every name, number, date and quoted phrase exactly as written.\n- Do not include the answer or any hint about it.\n- Do not write answer options, lists, or phrases like \"which of the following\" or \"which of these\".\n- Each rewrite must be a question ending with \"?\".\n- Write one rewrite per line, with no numbering and no extra text.\n\nQuestion: {question}",
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 300,
+    "dtype": "bfloat16"
+  },
+  "filters": [
+    "not a question",
+    "same as original",
+    "multiple-choice wording",
+    "leaks answer"
+  ],
+  "versions": {
+    "python": "3.12.10",
+    "torch": "2.15.0+cu132",
+    "transformers": "5.22.0"
+  },
+  "device": "NVIDIA GeForce RTX 3050 A Laptop GPU",
+  "this_run_seconds": 2275.2,
+  "summary": {
+    "questions": 795,
+    "candidates_total": 3613,
+    "candidates_passed": 3329,
+    "questions_with_0_passed": 16,
+    "questions_with_1_passed": 117,
+    "questions_with_2plus_passed": 662,
+    "total_generation_seconds": 2339.9
+  }
+}
