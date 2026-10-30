@@ -22,7 +22,9 @@ once, in three groups of 20:
     C  both say correct                          (claimed correct answers)
 Because each group is sampled at its own rate, the check reports each group's
 error rate as labelled, and from those a label-corrected count of wrong answers
-per 1,000 queries at the settings in real_traffic.py.
+per 1,000 queries at the settings in real_traffic.py, and the real-traffic
+safe threshold: per model and verifier, the threshold that serves the most
+correct answers while the label-corrected wrong answers stay within the budget.
 """
 import csv
 import json
@@ -30,8 +32,9 @@ import random
 import re
 import sys
 
+from costs import BUDGET, VERIFIERS
 from real_traffic import PAIRS, RECOMMENDED, accepts
-from simulate import DATA, OUT, normalize_answer, wilson
+from simulate import DATA, MODELS, OUT, THRESHOLDS, normalize_answer, wilson
 
 SEED = 11
 PER_GROUP = 20
@@ -132,6 +135,20 @@ def check():
                           "wrong_per_1000_lenient": round(1000 * counts["B"] / len(pairs), 1),
                           "wrong_per_1000_label_corrected": round(1000 * est / len(pairs), 1)})
 
+    # Real-traffic safe threshold, with every served pair weighted by its group's labelled wrong rate.
+    safe = []
+    for model in MODELS:
+        pairs = [r for r in rows if r["model"] == model]
+        for verifier in VERIFIERS:
+            best = None
+            for t in THRESHOLDS:
+                served = [r for r in pairs if float(r["similarity"]) >= t and accepts(verifier, r)]
+                wrong = 1000 * sum(wrong_rate[group(r)]["rate"] for r in served) / len(pairs)
+                correct = 1000 * len(served) / len(pairs) - wrong
+                if wrong <= BUDGET and (best is None or correct > best["correct_per_1000"]):
+                    best = {"threshold": t, "correct_per_1000": round(correct, 1), "wrong_per_1000": round(wrong, 2)}
+            safe.append({"model": model, "verifier": verifier, **(best or {"threshold": "none"})})
+
     result = {
         "labelled": len(labels), "unsure_excluded": len(labels) - len(used),
         "strict_vs_human": {"agree": sum(x == y for x, y in zip(strict, human)), "n": len(used),
@@ -140,6 +157,7 @@ def check():
                              "kappa": round(kappa(lenient, human), 3)},
         "wrong_rate_by_group": wrong_rate,
         "wrong_per_1000": corrected,
+        "real_traffic_safe_threshold": safe,
     }
     CHECK.write_text(json.dumps(result, indent=2), encoding="utf-8")
 
@@ -156,6 +174,11 @@ def check():
     for r in corrected:
         print(f"  {r['model']:<7}{r['verifier']:<9}{r['threshold']:>5}  {r['served_per_1000']:>7}  "
               f"{r['wrong_per_1000_strict']:>7}  {r['wrong_per_1000_lenient']:>8}  {r['wrong_per_1000_label_corrected']:>16}")
+    print(f"\nReal-traffic safe threshold (label-corrected wrong answers <= {BUDGET:g} per 1,000):")
+    for r in safe:
+        detail = (f"t={r['threshold']}, correct answers served {r['correct_per_1000']} per 1,000, "
+                  f"wrong {r['wrong_per_1000']}" if r["threshold"] != "none" else "none")
+        print(f"  {r['model']:<7}{r['verifier']:<9}{detail}")
     print(f"\nWrote {CHECK}")
 
 

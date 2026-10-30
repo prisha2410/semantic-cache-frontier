@@ -125,5 +125,61 @@
       "wrong_per_1000_lenient": 28.5,
       "wrong_per_1000_label_corrected": 30.8
     }
+  ],
+  "real_traffic_safe_threshold": [
+    {
+      "model": "minilm",
+      "verifier": "none",
+      "threshold": 0.98,
+      "correct_per_1000": 8.8,
+      "wrong_per_1000": 0.74
+    },
+    {
+      "model": "minilm",
+      "verifier": "rule",
+      "threshold": 0.98,
+      "correct_per_1000": 8.8,
+      "wrong_per_1000": 0.74
+    },
+    {
+      "model": "minilm",
+      "verifier": "judge",
+      "threshold": 0.98,
+      "correct_per_1000": 8.3,
+      "wrong_per_1000": 0.74
+    },
+    {
+      "model": "minilm",
+      "verifier": "both",
+      "threshold": 0.98,
+      "correct_per_1000": 8.3,
+      "wrong_per_1000": 0.74
+    },
+    {
+      "model": "mpnet",
+      "verifier": "none",
+      "threshold": "none"
+    },
+    {
+      "model": "mpnet",
+      "verifier": "rule",
+      "threshold": 0.98,
+      "correct_per_1000": 10.3,
+      "wrong_per_1000": 0.66
+    },
+    {
+      "model": "mpnet",
+      "verifier": "judge",
+      "threshold": 0.98,
+      "correct_per_1000": 10.8,
+      "wrong_per_1000": 0.66
+    },
+    {
+      "model": "mpnet",
+      "verifier": "both",
+      "threshold": 0.98,
+      "correct_per_1000": 9.8,
+      "wrong_per_1000": 0.66
+    }
   ]
 }

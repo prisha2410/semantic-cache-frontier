@@ -14,6 +14,8 @@ Runs, in order:
     simulation/hybrid_gate.py        embedding + word-overlap gate (does not help, and why)
     simulation/real_traffic.py       the cache on 2,000 real TriviaQA questions (analysis step;
                                      the GPU build step is run once beforehand)
+    simulation/real_labels.py check  answer scorer vs hand labels on real traffic, and the
+                                     label-corrected real-traffic safe threshold
     simulation/hand_labels.py check  answer scorer and judge vs our hand labels
 
 It starts from the committed embeddings (data/embeddings/), paraphrases and
@@ -44,11 +46,13 @@ STEPS = [
     ["simulation/bootstrap.py"],
     ["simulation/hybrid_gate.py"],
     ["simulation/real_traffic.py", "analyse"],
+    ["simulation/real_labels.py", "check"],
     ["simulation/hand_labels.py", "check"],
 ]
 CHECKED = ["sweep.csv", "sweep_tfidf.csv", "baseline_exact.csv", "costs.csv",
            "safe_thresholds.csv", "bootstrap_safe_thresholds.csv", "hybrid_gate.csv",
-           "real_traffic.csv", "hand_label_check.json"]
+           "real_traffic.csv", "real_traffic_label_check.json",
+           "hand_label_check.json"]
 
 
 def read(path):
