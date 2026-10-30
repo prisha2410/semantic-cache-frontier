@@ -10,6 +10,7 @@ Runs, in order:
                                      no GPU needed unless a new pair appears)
     simulation/costs.py              cost per 1,000 queries and safe thresholds,
                                      verifier_frontier.png
+    simulation/bootstrap.py          spread of the safe threshold over resampled query sets
     simulation/hand_labels.py check  answer scorer and judge vs our hand labels
 
 It starts from the committed embeddings (data/embeddings/), paraphrases and
@@ -37,10 +38,11 @@ STEPS = [
     ["simulation/plots.py"],
     ["simulation/verify.py"],
     ["simulation/costs.py"],
+    ["simulation/bootstrap.py"],
     ["simulation/hand_labels.py", "check"],
 ]
 CHECKED = ["sweep.csv", "sweep_tfidf.csv", "baseline_exact.csv", "costs.csv",
-           "safe_thresholds.csv", "hand_label_check.json"]
+           "safe_thresholds.csv", "bootstrap_safe_thresholds.csv", "hand_label_check.json"]
 
 
 def read(path):
@@ -75,11 +77,11 @@ def main():
     all_same = True
     for name in CHECKED:
         if name not in before:
-            print(f"  {name:<24} new (nothing committed to compare with)")
+            print(f"  {name:<30} new (nothing committed to compare with)")
             continue
         ok = same(before[name], read(RESULTS / name))
         all_same &= ok
-        print(f"  {name:<24} {'same numbers' if ok else 'DIFFERENT'}")
+        print(f"  {name:<30} {'same numbers' if ok else 'DIFFERENT'}")
     print("\nAll main results reproduced." if all_same else
           "\nSome results differ from the committed ones: see `git diff results/`.")
 

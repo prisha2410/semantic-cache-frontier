@@ -66,6 +66,7 @@ def load(model):
         v = verdicts.get((r["query_set"], r["query_id"]))
         assert model == "tfidf" or v is not None or sim < THRESHOLDS[0], f"missing verdict for {r['query_id']}"
         by_set.setdefault(r["query_set"], []).append({
+            "query_id": r["query_id"],
             "similarity": sim,
             "answer_correct": r["answer_correct"] == "True",
             "verdict": v,
