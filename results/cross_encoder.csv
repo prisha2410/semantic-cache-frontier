@@ -1,0 +1,9 @@
+model,verifier,cutoff,cutoff_source,synthetic_d10_threshold,synthetic_d10_saved,synthetic_d50_threshold,synthetic_d50_saved,synthetic_d100_threshold,synthetic_d100_saved,real_at_synthetic_t_correct,real_at_synthetic_t_wrong,real_safe_threshold,real_safe_correct,real_safe_wrong
+minilm,cross,0.05,chosen on synthetic,0.5,267.0,0.89,188.7,0.96,70.9,182.1,47.87,0.98,8.8,0.74
+minilm,cross,0.5,natural 0.5,0.5,236.7,0.5,236.7,0.89,175.3,132.7,24.26,0.98,7.8,0.74
+minilm,rule+cross,0.05,chosen on synthetic,0.5,233.5,0.5,233.5,0.5,233.5,139.3,31.16,0.98,8.8,0.74
+minilm,rule+cross,0.5,natural 0.5,0.5,209.3,0.5,209.3,0.5,209.3,107.1,15.95,0.98,7.8,0.74
+mpnet,cross,0.05,chosen on synthetic,0.5,267.0,0.92,148.9,0.98,26.5,177.5,48.53,0.98,10.3,0.66
+mpnet,cross,0.5,natural 0.5,0.5,236.7,0.5,236.7,0.97,45.9,127.2,25.34,0.98,9.3,0.66
+mpnet,rule+cross,0.05,chosen on synthetic,0.5,233.5,0.5,233.5,0.5,233.5,137.3,31.24,0.98,9.8,0.66
+mpnet,rule+cross,0.5,natural 0.5,0.5,209.3,0.5,209.3,0.5,209.3,103.9,16.61,0.98,8.8,0.66

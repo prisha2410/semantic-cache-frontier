@@ -16,6 +16,8 @@ Runs, in order:
                                      the GPU build step is run once beforehand)
     simulation/real_labels.py check  answer scorer vs hand labels on real traffic, and the
                                      label-corrected real-traffic safe threshold
+    simulation/cross_encoder.py      cross-encoder verifier: cut-off chosen on synthetic data,
+                                     tested on real traffic (scores computed once beforehand)
     simulation/hand_labels.py check  answer scorer and judge vs our hand labels
 
 It starts from the committed embeddings (data/embeddings/), paraphrases and
@@ -47,11 +49,12 @@ STEPS = [
     ["simulation/hybrid_gate.py"],
     ["simulation/real_traffic.py", "analyse"],
     ["simulation/real_labels.py", "check"],
+    ["simulation/cross_encoder.py", "analyse"],
     ["simulation/hand_labels.py", "check"],
 ]
 CHECKED = ["sweep.csv", "sweep_tfidf.csv", "baseline_exact.csv", "costs.csv",
            "safe_thresholds.csv", "bootstrap_safe_thresholds.csv", "hybrid_gate.csv",
-           "real_traffic.csv", "real_traffic_label_check.json",
+           "real_traffic.csv", "real_traffic_label_check.json", "cross_encoder.csv",
            "hand_label_check.json"]
 
 
