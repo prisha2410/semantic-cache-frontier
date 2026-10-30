@@ -6,3 +6,4 @@ __pycache__/
 
 # Jupyter autosave copies
 .ipynb_checkpoints/
+paraphrase/qwen_test_output.txt
