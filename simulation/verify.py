@@ -25,6 +25,10 @@ Output:
 Run from the repo root:
     python simulation/verify.py --limit 20   # quick check on the first 20 pairs
     python simulation/verify.py              # all pairs
+
+If every pair is already in judge_cache.jsonl, Qwen is not loaded at all: the
+verdicts are rebuilt from the cache, so this step runs without a GPU, and
+verify_meta.json (which records the original judging run) is left as it is.
 """
 import argparse
 import csv
@@ -177,8 +181,14 @@ def main():
     if args.limit:
         pairs = pairs[:args.limit]
 
-    judge, versions, device_name = make_qwen_judge()
     cache = load_cache()
+    if all(p in cache for p in pairs):
+        print(f"All {len(pairs)} unique pairs already judged; reusing {CACHE_FILE.name} (Qwen not loaded)")
+        summary = write_verdicts(rows, cache)
+        print_summary(summary)
+        return
+
+    judge, versions, device_name = make_qwen_judge()
     run_seconds = run_judge(pairs, cache, judge)
     summary = write_verdicts(rows, cache)
 
@@ -194,14 +204,17 @@ def main():
         "accept_rates": summary,
     }
     META_FILE.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
+    print_summary(summary)
+    print(f"\nWrote {META_FILE}")
 
+
+def print_summary(summary):
     print("\nShare of pairs accepted (similarity >= 0.75):")
     for model, sets in summary.items():
         print(f"  {model}")
         for qs, s in sets.items():
             print(f"    {qs:<12} n={s['pairs']:<5} rule {s['rule_accept']:.3f}   "
                   f"judge {s['judge_accept']:.3f}   unparsed {s['judge_unparsed']}")
-    print(f"\nWrote {META_FILE}")
 
 
 if __name__ == "__main__":
