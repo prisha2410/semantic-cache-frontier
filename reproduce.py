@@ -11,6 +11,9 @@ Runs, in order:
     simulation/costs.py              cost per 1,000 queries and safe thresholds,
                                      verifier_frontier.png
     simulation/bootstrap.py          spread of the safe threshold over resampled query sets
+    simulation/hybrid_gate.py        embedding + word-overlap gate (does not help, and why)
+    simulation/real_traffic.py       the cache on 2,000 real TriviaQA questions (analysis step;
+                                     the GPU build step is run once beforehand)
     simulation/hand_labels.py check  answer scorer and judge vs our hand labels
 
 It starts from the committed embeddings (data/embeddings/), paraphrases and
@@ -39,10 +42,13 @@ STEPS = [
     ["simulation/verify.py"],
     ["simulation/costs.py"],
     ["simulation/bootstrap.py"],
+    ["simulation/hybrid_gate.py"],
+    ["simulation/real_traffic.py", "analyse"],
     ["simulation/hand_labels.py", "check"],
 ]
 CHECKED = ["sweep.csv", "sweep_tfidf.csv", "baseline_exact.csv", "costs.csv",
-           "safe_thresholds.csv", "bootstrap_safe_thresholds.csv", "hand_label_check.json"]
+           "safe_thresholds.csv", "bootstrap_safe_thresholds.csv", "hybrid_gate.csv",
+           "real_traffic.csv", "hand_label_check.json"]
 
 
 def read(path):

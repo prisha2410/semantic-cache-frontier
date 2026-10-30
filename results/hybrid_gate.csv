@@ -1,0 +1,19 @@
+model,kind,query_set,value
+minilm,median_word_overlap,paraphrase,0.68
+minilm,median_word_overlap,number,0.889
+minilm,median_word_overlap,entity,0.6
+minilm,median_word_overlap,comparative,0.829
+minilm,median_word_overlap,unit,0.806
+minilm,median_word_overlap,negation,0.934
+minilm,best_safe_d10,,t=0.5 g=0.94 saved=16.6
+minilm,best_safe_d50,,t=0.89 g=0.95 saved=14.7
+minilm,best_safe_d100,,t=0.5 g=0.96 saved=12.6
+mpnet,median_word_overlap,paraphrase,0.68
+mpnet,median_word_overlap,number,0.889
+mpnet,median_word_overlap,entity,0.6
+mpnet,median_word_overlap,comparative,0.829
+mpnet,median_word_overlap,unit,0.806
+mpnet,median_word_overlap,negation,0.934
+mpnet,best_safe_d10,,t=0.5 g=0.94 saved=16.6
+mpnet,best_safe_d50,,t=0.84 g=0.95 saved=14.9
+mpnet,best_safe_d100,,t=0.5 g=0.96 saved=12.6
