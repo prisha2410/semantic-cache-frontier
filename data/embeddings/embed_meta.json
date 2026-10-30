@@ -1,0 +1,41 @@
+{
+  "texts": 2701,
+  "by_role": {
+    "cache": 911,
+    "query_paraphrase": 1574,
+    "query_adversarial": 216
+  },
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 3050 A Laptop GPU",
+  "versions": {
+    "python": "3.12.10",
+    "torch": "2.15.0+cu132",
+    "transformers": "5.22.0",
+    "sentence_transformers": "6.2.0",
+    "numpy": "2.5.4"
+  },
+  "normalised": true,
+  "batch_size": 64,
+  "models": {
+    "minilm": {
+      "name": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "shape": [
+        2701,
+        384
+      ],
+      "max_seq_length": 256,
+      "seconds": 1.3
+    },
+    "mpnet": {
+      "name": "sentence-transformers/all-mpnet-base-v2",
+      "revision": "e8c3b32edf5434bc2275fc9bab85f82640a19130",
+      "shape": [
+        2701,
+        768
+      ],
+      "max_seq_length": 384,
+      "seconds": 3.6
+    }
+  }
+}
