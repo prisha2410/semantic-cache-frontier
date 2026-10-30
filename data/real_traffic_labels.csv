@@ -1,0 +1,61 @@
+﻿label_id,query,reference_answer,cached_question,cached_answer,your_label (correct/wrong/unsure),your_note
+1,In which state was US President John F Kennedy assassinated?,TEXAS,In which city was US president John F Kennedy assassinated on 22 November 1963?,"Dallas, Texas",correct,Cached answer includes Texas
+2,Which modern currency is derived from the old European coin the ‘thaler’?,Dollar,In what year was the pound coin introduced?,1983,wrong,Different question (pound coin year)
+3,Which dramatist wrote 'The Alchemist in 1610?,Ben Jonson,Who wrote the play 'The Alchemist' in 1610?,Ben Jonson,correct,
+4,In which Chicago theater did over 500 people die in a fire in 1903?,Iroquois Theater,Who was killed at Ford's Theatre?,Abraham Lincoln,wrong,Different question (Ford's Theatre)
+5,The Hungarian national dish goulash is chiefly flavoured with which spice?,Paprika,"The Hungarian stew, goulash is flavoured with which pepper?",Paprika,correct,
+6,What in Norht East cuisine is a 'Singing Hinny'?,TYPE OF CAKE/SCONE,A ‘Singing Hinny’ is what type of foodstuff’?,Cake,correct,
+7,How is seriously rich Percy Miller better known?,Master P,"In a famous novel, how is Sir Percy Blakeney otherwise known?",The Scarlet Pimpernel,wrong,Different question (Scarlet Pimpernel)
+8,"What sporting club is based at Smiths Lawn, in Windsor Great Park?",Guards Polo Club,Smith's Lawn is a famed venue in which sport?,Polo,wrong,"Gives sport, not the club asked for"
+9,Who supposedly fiddled while Rome burned (but actually didn't)?,Nero,Who was the Emperor of Rome at the time of the Great Fire in AD 64?,Nero,correct,
+10,What six letter 'B' word means Violation of a law or contract?,Breach,What term is used for the agreement of two or more persons to commit an illegal act?,Conspiracy,wrong,Conspiracy is not 'Breach'
+11,Digambara and Svetambara are the two major sects in which religion?,Jainism,Theravada and Mahayana are the main branches of which religion?,Buddhism,wrong,Different religion (Buddhism vs Jainism)
+12,"Catherine of Valois, Matilda and Margaret Beaufort were all mothers of English Kings with which first name?",Henry,Catherine of Valois was the wife of which English king?,Henry the Fifth,wrong,Different question; Henry V is not the answer
+13,"At 1560 miles, what is the longest river in Australia?",The Murray,What is the longest river in Australia?,River Murray,correct,
+14,Sant Francesc Xavier is the capital of which Balearic island?,Formentera,Which is the largest of the Balearic Islands?,Majorca,wrong,Largest island (Majorca) is not Formentera
+15,"In Gustav Hoist's work, ""The Planet Suite"", which planet is known as ""The Magician""?",URANUS,"In The Planets by Gustav Holst, which planet is the Magician?",URANUS,correct,
+16,"Who directed the films Deliverance, Hope and Glory and the Tailor of Panama?",John Boorman,Who directed the movie Trading Places?,John Landis,wrong,Different film (Trading Places)
+17,Which famous Elizabethan was executed for treason by King James in 1618?,Sir Walter Raleigh,Who was tried for treason on 17 November 1603 for trying to remove James I from the Engish throne?,Walter Raleigh,correct,
+18,Who wrote the play 'Accidental Death of an Anarchist' ?,DARIO FO,"Who wrote the play ""Death of a Salesman""?",Arthur Miller,wrong,Different play (Death of a Salesman)
+19,Winch Australian state capital is on the River Torrens?,ADELAIDE,Which Australian state capital is close to the River Torrens?,Adelaide,correct,
+20,"The Churn, the Windrush, the Cherwell and the Mole are all tributaries of which major river?",Thames,Into which body of water does the River Ganges flow?,THE BAY OF BENGAL,wrong,Different river (Ganges)
+21,What is the largest country in South America?,Brazil,Which country has the largest area and population in South America?,Brazil,correct,
+22,‘Canard’ is French for which creature?,Duck,Grenouille is the Frenchfor which creature?,FROG,wrong,Different word (grenouille)
+23,Which element is the best conductor of electricity?,Silver,Which metal is the best conductor of electricity?,Silver,correct,
+24,Who was the mother of King James I of England?,"Mary, Queen of Scots",Who was the mother of King James l of England?,Mary Queen of Scots,correct,
+25,"What video game ended with a ""Fatality"", or rarely ""Friendship""?",Mortal Kombat,A lastingly popular game released in 1991 by Psygnosis was called what?,Lemmings,wrong,Different game (Lemmings)
+26,"On 7th August 2008, which region was invaded by Georgian troops, prompting Russian retaliation?",SOUTH OSSETIA,What country did Russia invade in 2008?,Georgia,wrong,"Asked region (South Ossetia); cached says Georgia, which is the invader here"
+27,Which fish is used in the soup 'Cullen Skink'?,HADDOCK,"Cullen Skink is a hearty soup made with potatoes, onion and which fish?",Smoked Haddock,correct,
+28,Bole International Airport is in which African country?,Ethiopia,Which Africancapital city is served by 'Bole Airport'?,ADDIS ABABA (Ethiopia),correct,
+29,In which U.S. state is the Painted Desert ?,Arizona.,The Painted Desert is in which US state?,Arizona,correct,
+30,Who wrote the music for 'Billy Elliot'?,ELTON JOHN,"Who wrote the music for 'Billy Elliot, The Musical'?",ELTON JOHN,correct,
+31,Which English king was the father of Queen Anne?,James II,Queen Anne was the second daughter of which king ?,JAMES II,correct,
+32,"Awarded to applicants annually since 1902, the Rhodes Scholarships are for study at what institution?",University of Oxford,At what university do Rhodes Scholars study?,Oxford,correct,
+33,What is the name of the RAF air rescue station on Anglesey?,Valley,Which RAF base is located on Cyprus?,RAF Akrotiri,wrong,Different base (Akrotiri vs Valley)
+34,"During World War I, which Belgian city that was the centre of intense battles was nicknamed 'wipers'?",Ypres,Which Belgian city was the site of the first battle between Britain and Germany in World War I?,MONS,wrong,Mons is not Ypres
+35,What is the smallest garden bird in Britain?,Goldcrest,Which is Britain's smallest bird?,GOLDCREST,correct,
+36,Which is the world's oldest international sporting trophy?,The Americas Cup,What is the oldest trophy in international sport?,The Americas Cup,correct,
+37,"French actress Catherine Deneuve has been married once, from 1965 to 1972, to whom?",Photographer David Bailey,French actress Catherine Deneuve was the second wife of which photographer?,DAVID BAILEY,correct,
+38,Which fictional human character was known as the 'Napoleon of Crime'?,MORIARTY,Which literary character was described by the author as 'The Napoleon of Crime'?,PROFESSOR JAMES MORIARTY,correct,
+39,Thomas à Beckett was killed in which English Cathedral?,Canterbury Cathedral,Thomas Beckett was murdered in which Cathedral?,Canterbury,correct,
+40,Lady Day (The Feast of the Annunciation) is on what date?,March 25th,Lady Day (The Feast of the Annunciation of the Blessed Virgin) falls in which month of the year?,March,unsure,Cached gives month only; query asks for the date (25th)
+41,St Helier is the capital of which Channel Island?,Jersey,"Which is the largest of the Channel Islands, where the official language is French?",Jersey,correct,
+42,"Who in 1962, was exchanged in Berlin for Russian general Rudolf Abel, after months of secret negotiation?","American U2 pilot, GARY POWERS",Rudolf Abel was exchanged by the Americans for the return of whom?,GARY POWERS,correct,
+43,Which seventeenth century leader reputedly told his troops to ‘put your trust in God and keep your powder dry’?,Oliver Cromwell,The phrase ‘Trust in God and keep your powder dry’ is attributed to which historical English figure?,Oliver Cromwell,correct,
+44,Which 1957 treaty created the European Economic Community?,TREATY of ROME,The Treaty of where established the European Economic Community in March 1957?,Rome,correct,
+45,Who discovered Uranus in 1781?,William Herschel,"Who discovered Uranus and one of its moons, Titania, between 1781 and 1787?",Herschel,correct,
+46,What 2002 novel was made into a film starring Dakota Fanning and Queen Latifah 6 years later?,The Secret Life of Bees,"""An excellent year's progress"" is the closing line of which 1996 novel, later made into a 2001 film?",BRIDGET JONES'S DIARY,wrong,Different novel (Bridget Jones)
+47,Who was disqualified from being an MP in 1960 after inheriting a title upon his father's death?,ANTHONY WEDGEWOOD BENN,Who was the first person to take advantage of The Peerage Act 1963 to renounce his title?,Anthony Wedgewood-Benn (accept Viscount Stansgate),correct,
+48,Who had hits with Wishin' and Hopin and You don't have to say you love me,Dusty Springfield,Whose only number 1 was in 1966 with 'You Don't Have to Say You Love Me'?,DUSTY SPRINGFIELD,correct,
+49,On which racecourse is the King George VI Chase run?,KEMPTON,Where is the 'king George VI' horse race held?,KEMPTON PARK,correct,
+50,Which famous fashion designer was murdered by Andrew Cunanan in Florida in 1997?,GIANNI VERSACE,Which Italian fashion designer was shot and killed outside his Miami home by Andrew Cunanan in 1997?,Gianni Versace,correct,
+51,What was discovered at Rum Jungle in Australia in 1952,Uranium,Uranium deposit Rum Jungle is in which Australian state?,Northern Territory,wrong,"Cached gives location, not what was discovered"
+52,Where does Homer Simpson work?,Springfield Nuclear Power Plant,What is the name of the city in which The Simpsons live?,Springfield,wrong,"Cached gives city, not workplace"
+53,Javier Sotomayor set the world record in 1993 for which athletics event?,High Jump,Colin Jackson once held the world record in which athletics event?,110m hurdles,wrong,Different athlete/event (Colin Jackson)
+54,Who was the first woman to top the UK singles chart with a song she had written herself?,Kate Bush,Who was the first female artist to achieve 32 consecutive UK top ten hits?,MADONNA,wrong,Madonna is a different question
+55,In which country is the Bolivar the main unit of currency?,Venezuela,Which country's currency is called the Bolivar?,VENEZUELA,correct,
+56,How many humps does a Bactrian camel have?,2,The Bactrian Camel is named after a region in which country?,AFGHANISTAN,wrong,"Cached answer is about region, not hump count"
+57,"In Scotland, what are breeks?",Trousers,"What is the main ingredient of the traditional Scottish soup, 'Partan Bree'?",CRAB,wrong,Different question (Partan Bree)
+58,What medical condition is characterised by an excess of watery fluid collecting in the Cavities or Tissues of the body?,Oedema or Dropsy,What is another namefor Oedema?,DROPSY,correct,
+59,What is the name of Dr. Seuss's egg-hatching elephant?,Horton,What Dr. Seuss character hears a Who?,Horton,correct,
+60,"In which country was the Althing, a legislative and judiciary parliament, founded in 930?",Iceland,"Which is the world's oldest parliament, founded in 930?","Althing, Iceland",correct,
