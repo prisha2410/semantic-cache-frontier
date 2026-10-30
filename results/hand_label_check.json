@@ -1,0 +1,41 @@
+{
+  "labelled": 57,
+  "unsure_excluded": 0,
+  "scorer_vs_human": {
+    "n": 57,
+    "agree": 57,
+    "agreement": 1.0,
+    "kappa": 1.0,
+    "table": {
+      "scorer=yes, human=correct": 30,
+      "scorer=yes, human=wrong": 0,
+      "scorer=no, human=correct": 0,
+      "scorer=no, human=wrong": 27
+    }
+  },
+  "judge_vs_human": {
+    "n": 57,
+    "agree": 39,
+    "agreement": 0.684,
+    "kappa": 0.374,
+    "table": {
+      "judge=yes, human=correct": 18,
+      "judge=yes, human=wrong": 6,
+      "judge=no, human=correct": 12,
+      "judge=no, human=wrong": 21
+    }
+  },
+  "judge_vs_scorer_all_served_pairs": {
+    "n": 1723,
+    "agree": 1480,
+    "agreement": 0.859,
+    "kappa": 0.454,
+    "table": {
+      "judge=yes, scorer=correct": 1344,
+      "judge=yes, scorer=wrong": 44,
+      "judge=no, scorer=correct": 199,
+      "judge=no, scorer=wrong": 136
+    }
+  },
+  "disagreements_scorer": []
+}
