@@ -1,0 +1,51 @@
+﻿check_id,id,question,answer,paraphrase,your_verdict (good/bad),your_reason
+1,q0655,What is produced by the Chorleywood Process?,BREAD,What material is made during the Chorleywood Process?,good,
+2,q0717,What kind of drink is Barack which is a favourite drink of Hungarians,Apricot brandy,Which alcoholic drink is widely enjoyed by Hungarian people?,bad,"asks about Hungarian drinks in general; drops Barack, so not the same answer"
+3,q0732,Which actor who played Superman in the films became a quadriplegic and has since died,Christopher Reeve,Who was the actor that played Superman in the movies and subsequently suffered from paralysis after an accident?,good,
+4,q0249,"In old English, a Yeoman was originally a man possessing/working with?",Land,Which item or task did a Yeoman typically possess or handle in the early form of Old English?,bad,unsure; 'item or task' is vaguer than land
+5,q0220,In which English couny are the towns of Grantham and Skegness ?,LINCOLNSHIRE,In what nation are the cities of Grantham and Skegness located?,bad,"asks nation, not county; says cities not towns"
+6,q0266,Penguins increase their swimming speed by emitting (What?) from their feathers?,Air bubbles,In what way do penguins improve their aquatic agility?,bad,too vague; drops air bubbles/feathers detail
+7,q0297,"Who is the subject of The Future Is Unwritten, a film by Julien Temple?",Joe Strummer,"What actor portrays the main character in Julien Temple's film ""The Future Is Unwritten""?",bad,asks which actor portrays the lead; film is about Joe Strummer
+8,q0788,How many gold stars are there on the blue background of the European Union flag?,12,How many gold stars adorn the blue section of the EU flag?,good,
+9,q0008,Ellen Church is recognized as being the first female what?,Air Hostess,In which field did Ellen Church pioneer as the inaugural female recipient of this distinction?,bad,garbled; 'recipient of distinction' not 'first female what'
+10,q0559,What was the name of the operation that resulted from the Jimmy Saville Sex Scandal?,YEWTREE,Which operation followed the revelations of the Jimmy Savile's sexual misconduct scandal?,good,
+11,q0644,"Which company has used the advertising slogan ""The Appliance Of Science""?",ZANUSSI,"What brand is known for its advertising campaign featuring the tagline ""The Appliance Of Science""?",good,
+12,q0408,Who released the 1970 album called Atom Heart Mother?,Pink Floyd,"Which band released Atom Heart Mother, the 1970 album?",good,
+13,q0769,Who failed to receive a posthumous Nobel Prize in 1962 despite her contribution to building a model of DNA?,Rosalind Franklin,Which individual did not win the posthumous Nobel Prize in 1962 due to their contributions to DNA modeling?,good,
+14,q0537,"In the Sermon on the Mount, what was promised to the poor?",Kingdom of Heaven,What did Jesus promise to the poor in the Sermon on the Mount?,good,
+15,q0699,Clarissa is the eponymous protagonist of which Virginia Woolf novel set on one day in post World War One London?,Mrs Dalloway,Which Virginia Woolf work centers around Clarissa's experiences?,good,unsure
+16,q0655,What is produced by the Chorleywood Process?,BREAD,What product is generated through the Chorleywood Process?,good,
+17,q0073,Curio is a character in which Shakespeare play?,Twelfth Night,Who plays the role of Curio in Shakespeare's play?,bad,"asks who plays Curio, not which play"
+18,q0778,Where was Patsy Gallant travelling to and from in her seventies hit song?,From New York to LA,"In her seventies hit song, where was Patsy Gallant travelling from and to?",good,
+19,q0127,"In the US, National Ice Cream Day, the third Sunday in July, was designated by which President?",Ronald Reagan,Who established National Ice Cream Day in the United States?,good,
+20,q0284,In the early 1900s a thriller was instead more commonly referred to as what sort of book?,Shocker,What genre did thrillers fall under before they were called mysteries?,bad,adds wrong fact ('before called mysteries')
+21,q0648,Fritz Haber won the 1918 Nobel Prize in Chemistry for synthesising which chemical compound?,AMMONIA,Who received the 1918 Nobel Prize in Chemistry for synthesizing what chemical compound?,bad,also asks who received the prize; drops Haber
+22,q0146,Which political party did Picasso join in 1944?,Communist,Which political party did Pablo Picasso belong to in 1944?,good,
+23,q0491,What is the capital city of Albania?,TIRANA,Albania's capital city is called what?,good,
+24,q0399,Which Russian was the first man to walk in space?,Alexei Leonov,Which Russian astronaut was the first to make a journey around our planet?,bad,"journey around the planet is orbit (Gagarin), not first spacewalk"
+25,q0310,"What is the name used in the USA for the board game that the English call ""draughts""?",Checkers,"What is the official term for the board game known as ""draughts"" in the United States?",good,unsure
+26,q0102,Which nation’s football team won the 1970 FIFA World Cup?,Brazil,What was the winning nation of the 1970 FIFA World Cup?,good,
+27,q0753,The 1960 Summer Olympic Games were held in which city?,Rome,Which city hosted the 1960 Summer Olympics?,good,
+28,q0712,What is the former name of Sri Lanka,Ceylon,Which is the old name of Sri Lanka?,good,
+29,q0003,What college once had 22 members of the Phi Beta Kappa honor society on its football team?,"Dartmouth, in 1925",What institution has a record of having 22 members from the Phi Beta Kappa honor society on its football roster?,good,
+30,q0228,What was US tennis player Anne White instructed to cease wearing at Wimbledon in 1985?,White lycra jumpsuit,What did Wimbledon officials instruct US player Anne White to stop wearing in 1985?,good,
+31,q0626,"The Bob Dylan songs 'Rainy Day Women', 'I Want You' and 'Just Like A Woman' featured on which album?",'BLONDE ON BLONDE',"Which album contained Bob Dylan's songs 'Rainy Day Women', 'I Want You', and 'Just Like A Woman'?",good,
+32,q0413,For which cricket county does former England test batsman Mark Ramprakash play?,Surrey,Which cricket county does former England Test batsman Mark Ramprakash play for?,good,
+33,q0314,"The Great Plague, an outbreak of disease in England that killed an estimated 100,000 people, lasted for how long?",538 days,In what time frame did the Great Plague occur in England?,bad,asks time frame (years) not duration (538 days)
+34,q0717,What kind of drink is Barack which is a favourite drink of Hungarians,Apricot brandy,Barack is a favourite drink of Hungarians; what kind of drink is it?,good,
+35,q0798,What was the name of the Scottish clan featured in the TV show and movies Highlander?,MacLeod,Which clan from Scotland appeared in the TV series and films called Highlander?,good,
+36,q0182,What kind of food is Bel Paese?,Cheese,What kind of culinary offerings does Bel Paese provide?,bad,too vague; not what kind of food
+37,q0791,"Who famously opined that ""In the future, everyone will be world-famous for 15 minutes""?",Andy Warhol,"Who is credited with saying, ""In the future, everyone will be famous for 15 minutes""?",good,
+38,q0289,What was Jenson Button's championship-clinching finishing place in the 2009 Brazilian Grand Prix?,Fifth,At what point in the 2009 Brazilian Grand Prix did Jenson Button cross the finish line to claim his first World Championship title?,good,unsure
+39,q0655,What is produced by the Chorleywood Process?,BREAD,What chemical compound does the Chorleywood Process produce?,bad,asks for chemical compound; answer is bread
+40,q0289,What was Jenson Button's championship-clinching finishing place in the 2009 Brazilian Grand Prix?,Fifth,What position did Jenson Button achieve at the end of the 2009 Brazilian Grand Prix to clinch his championship title?,good,
+41,q0570,"Which US comedienne is known for husbands, face lifts and jewellery?",Joan Rivers,"Which performer is recognized for their comedic performances featuring characters who are married, undergoing plastic surgery, and adorned with fashionable jewelry pieces?",bad,drops US and distorts details; asks about characters
+42,q0567,"Which word completes the title of the trade union BECTU - Entertainment, Cinematograph and Theatre Union?",BROADCASTING,"What character forms the concluding element of the trade union identified as BECTU - Entertainment, Cinematograph and Theatre Union?",bad,"asks for concluding element, answer is the missing first word"
+43,q0157,What do Americans call a love-bite?,A Hickey,"In America, what is a love-bite called?",good,
+44,q0356,"What character made his first appearance in the story ""A Study in Scarlet""?",Sherlock Holmes,"Who portrayed the protagonist's first appearance in the literary work titled ""A Study in Scarlet""?",bad,"asks who portrayed (actor), not which character"
+45,q0410,Which is the longest running Broadway musical in history?,Phantom of the Opera,What is the most enduring Broadway show ever?,good,
+46,q0135,In which US state was actress Nicole Kidman born?,Hawaii,Where was Nicole Kidman born?,good,unsure
+47,q0753,The 1960 Summer Olympic Games were held in which city?,Rome,In what year did the 1960 Summer Olympics take place?,bad,"asks for year, not city"
+48,q0642,"Which word meaning a dreadful noise, derives from the Greek for ""bad sounds""?",CACOPHANY,"What word for a dreadful noise comes from the Greek for ""bad sounds""?",good,
+49,q0748,Which football league side was once known as Newton Heath,Manchester United,Which football league club used to be called Newton Heath?,good,
+50,q0141,What was the name of the first permanent English settlement in North America?,Jamestown,Which was the first permanent English settlement in North America?,good,
