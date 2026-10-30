@@ -13,6 +13,9 @@ real-traffic numbers are a fair out-of-sample test:
     2. real traffic: with c* (and with the model's natural cut-off 0.5),
        label-corrected wrong and correct answers per 1,000 real questions,
        and the real-traffic safe threshold, as in real_labels.py
+    3. an upper bound: the best (c, t) chosen on the real traffic itself, for a
+       budget of 1 and of 5 wrong answers per 1,000. This is NOT a fair test (it
+       is tuned on the data it is scored on); it shows the most any cut-off could do.
 
     python simulation/cross_encoder.py score     # GPU (or a slow CPU), once
         scores every judged pair from the synthetic test and from real traffic,
@@ -35,6 +38,7 @@ SCORES = OUT / "cross_scores.jsonl"
 SUMMARY = OUT / "cross_encoder.csv"
 MIN_SIMILARITY = 0.50
 CUTOFFS = [round(0.05 * i, 2) for i in range(1, 20)]  # 0.05 ... 0.95
+UPPER_BUDGETS = [1.0, 5.0]  # wrong answers per 1,000, for the upper bound
 VERIFIERS = {
     "cross": lambda v, ok: ok,
     "rule+cross": lambda v, ok: v["rule_accept"] == "True" and ok,
@@ -97,6 +101,16 @@ def synthetic_safe(by_set, scores, verifier, c, d):
     return best
 
 
+def upper_bound(rows, scores, wrong_rate, verifier, budget):
+    """Best (c, t) on real traffic itself: the most correct answers within the budget."""
+    best = None
+    for c in CUTOFFS:
+        for t, correct, wrong in real_traffic(rows, scores, wrong_rate, verifier, c):
+            if wrong <= budget and (best is None or correct > best[2]):
+                best = (c, t, correct, wrong)
+    return best
+
+
 def real_traffic(rows, scores, wrong_rate, verifier, c):
     """Per threshold: label-corrected wrong and correct answers per 1,000 real questions."""
     out = []
@@ -145,7 +159,18 @@ def analyse():
                 row["real_safe_correct"] = round(safe[1], 1) if safe else 0.0
                 row["real_safe_wrong"] = round(safe[2], 2) if safe else ""
                 out.append(row)
-    write_csv(SUMMARY, out)
+    upper = []
+    for model in MODELS:
+        rows = [r for r in all_rows if r["model"] == model]
+        for verifier in VERIFIERS:
+            for budget in UPPER_BUDGETS:
+                b = upper_bound(rows, scores, wrong_rate, verifier, budget)
+                upper.append({"model": model, "verifier": verifier, "cutoff": b[0] if b else "none",
+                              "cutoff_source": f"upper bound, budget {budget:g}",
+                              "real_safe_threshold": b[1] if b else "none",
+                              "real_safe_correct": round(b[2], 1) if b else 0.0,
+                              "real_safe_wrong": round(b[3], 2) if b else ""})
+    write_csv(SUMMARY, out + upper)
 
     print(f"Cross-encoder verifier ({MODEL_NAME}); cut-off c chosen on synthetic data, tested on real traffic")
     print(f"  {'model':<7}{'verifier':<11}{'c':>5} {'source':<20}{'synthetic D=10':<20}"
@@ -158,6 +183,11 @@ def analyse():
                 if r["real_safe_threshold"] != "none" else "none")
         print(f"  {r['model']:<7}{r['verifier']:<11}{r['cutoff']:>5} {r['cutoff_source']:<20}{syn:<20}{real:<24}{safe}")
     print("  (real-traffic numbers are per 1,000 questions, label-corrected)")
+    print("\nUpper bound: cut-off AND threshold chosen on the real traffic itself (not a fair test)")
+    for r in upper:
+        detail = (f"c={r['cutoff']}, t={r['real_safe_threshold']}: {r['real_safe_correct']} correct, "
+                  f"{r['real_safe_wrong']} wrong per 1,000" if r["cutoff"] != "none" else "none")
+        print(f"  {r['model']:<7}{r['verifier']:<11}{r['cutoff_source']:<24}{detail}")
     print(f"\nWrote {SUMMARY}")
 
 

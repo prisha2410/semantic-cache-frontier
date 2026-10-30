@@ -7,3 +7,11 @@ mpnet,cross,0.05,chosen on synthetic,0.5,267.0,0.92,148.9,0.98,26.5,177.5,48.53,
 mpnet,cross,0.5,natural 0.5,0.5,236.7,0.5,236.7,0.97,45.9,127.2,25.34,0.98,9.3,0.66
 mpnet,rule+cross,0.05,chosen on synthetic,0.5,233.5,0.5,233.5,0.5,233.5,137.3,31.24,0.98,9.8,0.66
 mpnet,rule+cross,0.5,natural 0.5,0.5,209.3,0.5,209.3,0.5,209.3,103.9,16.61,0.98,8.8,0.66
+minilm,cross,0.05,"upper bound, budget 1",,,,,,,,,0.98,8.8,0.74
+minilm,cross,0.45,"upper bound, budget 5",,,,,,,,,0.91,74.6,4.95
+minilm,rule+cross,0.05,"upper bound, budget 1",,,,,,,,,0.98,8.8,0.74
+minilm,rule+cross,0.5,"upper bound, budget 5",,,,,,,,,0.9,69.8,4.71
+mpnet,cross,0.05,"upper bound, budget 1",,,,,,,,,0.98,10.3,0.66
+mpnet,cross,0.1,"upper bound, budget 5",,,,,,,,,0.93,64.5,4.53
+mpnet,rule+cross,0.05,"upper bound, budget 1",,,,,,,,,0.98,9.8,0.66
+mpnet,rule+cross,0.05,"upper bound, budget 5",,,,,,,,,0.92,65.1,4.95
