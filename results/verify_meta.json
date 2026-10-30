@@ -1,0 +1,96 @@
+{
+  "judge_model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "prompt": "Question A: {query}\nQuestion B: {cached}\n\nDo these two questions have exactly the same correct answer? Answer only \"yes\" or \"no\".",
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 3,
+    "dtype": "bfloat16"
+  },
+  "unparsed_answer": "counted as reject",
+  "min_similarity_checked": 0.75,
+  "versions": {
+    "python": "3.12.10",
+    "torch": "2.15.0+cu132",
+    "transformers": "5.22.0"
+  },
+  "device": "NVIDIA GeForce RTX 3050 A Laptop GPU",
+  "this_run_seconds": 143.6,
+  "accept_rates": {
+    "minilm": {
+      "comparative": {
+        "pairs": 50,
+        "rule_accept": 0.0,
+        "judge_accept": 0.02,
+        "judge_unparsed": 0
+      },
+      "entity": {
+        "pairs": 11,
+        "rule_accept": 1.0,
+        "judge_accept": 0.091,
+        "judge_unparsed": 0
+      },
+      "negation": {
+        "pairs": 50,
+        "rule_accept": 0.0,
+        "judge_accept": 0.84,
+        "judge_unparsed": 0
+      },
+      "number": {
+        "pairs": 35,
+        "rule_accept": 0.0,
+        "judge_accept": 0.0,
+        "judge_unparsed": 0
+      },
+      "paraphrase": {
+        "pairs": 1493,
+        "rule_accept": 0.865,
+        "judge_accept": 0.883,
+        "judge_unparsed": 0
+      },
+      "unit": {
+        "pairs": 30,
+        "rule_accept": 0.0,
+        "judge_accept": 0.0,
+        "judge_unparsed": 0
+      }
+    },
+    "mpnet": {
+      "comparative": {
+        "pairs": 50,
+        "rule_accept": 0.0,
+        "judge_accept": 0.0,
+        "judge_unparsed": 0
+      },
+      "entity": {
+        "pairs": 10,
+        "rule_accept": 1.0,
+        "judge_accept": 0.1,
+        "judge_unparsed": 0
+      },
+      "negation": {
+        "pairs": 50,
+        "rule_accept": 0.0,
+        "judge_accept": 0.84,
+        "judge_unparsed": 0
+      },
+      "number": {
+        "pairs": 36,
+        "rule_accept": 0.0,
+        "judge_accept": 0.0,
+        "judge_unparsed": 0
+      },
+      "paraphrase": {
+        "pairs": 1519,
+        "rule_accept": 0.859,
+        "judge_accept": 0.874,
+        "judge_unparsed": 0
+      },
+      "unit": {
+        "pairs": 29,
+        "rule_accept": 0.0,
+        "judge_accept": 0.0,
+        "judge_unparsed": 0
+      }
+    }
+  }
+}
