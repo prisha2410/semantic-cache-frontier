@@ -152,11 +152,11 @@ def simulate_set(vectors, index, aliases, queries, cache):
     return out
 
 
-def sweep(per_query):
+def sweep(per_query, thresholds=THRESHOLDS):
     """Counts and rates at every threshold."""
     rows = []
     n = len(per_query)
-    for t in THRESHOLDS:
+    for t in thresholds:
         hits = [r for r in per_query if r["similarity"] >= t]
         correct = sum(r["answer_correct"] for r in hits)
         errors = len(hits) - correct

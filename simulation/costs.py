@@ -4,6 +4,8 @@ A cache hit is SERVED only if similarity >= threshold AND the verifier accepts
 the pair; otherwise the query goes to the LLM (a call, but no wrong answer).
 
 Verifiers: none, rule (rule_guard.py), judge (Qwen2.5-1.5B), both (rule AND judge).
+Baselines (baseline.py): the TF-IDF cache, with no verifier, over its own wider
+threshold range; and the exact-match cache, a single point.
 
 Traffic model per 1,000 queries (illustrative assumptions, not measured):
     R = 300 genuine rephrasings of a cached question
@@ -17,7 +19,8 @@ per 1,000 queries.
     conservative  uses the upper end of each 95% Wilson interval instead, because
                   0 errors in 30-50 items does not show the true rate is 0
 
-Inputs:  results/nearest_<model>.csv, results/verdicts_<model>.csv
+Inputs:  results/nearest_<model>.csv, results/verdicts_<model>.csv (embedding models only),
+         results/nearest_tfidf.csv, results/baseline_exact.csv
 Outputs: results/costs.csv, results/safe_thresholds.csv,
          results/figures/verifier_frontier.png
 
@@ -26,10 +29,12 @@ Run from the repo root:
 """
 import csv
 
+from baseline import TFIDF_THRESHOLDS
 from plots import FIGS, INK, INK_2, MODEL_STYLE, MUTED, SURFACE, plt, style_axes
 from simulate import MODELS, OUT, QUERY_SETS, THRESHOLDS, wilson, write_csv
 
 VERIFIERS = ["none", "rule", "judge", "both"]
+TFIDF_STYLE = {"color": "#1baf7a", "label": "TF-IDF (word overlap)"}  # reference palette slot 3
 CATEGORIES = QUERY_SETS[1:]  # number, entity, comparative, unit, negation
 R = 300
 D_SCENARIOS = [10, 50, 100]
@@ -45,16 +50,21 @@ def accepts(verifier, row):
 
 
 def load(model):
-    """Every query with its similarity, answer check and (if similarity >= 0.75) verdicts."""
-    with (OUT / f"verdicts_{model}.csv").open(encoding="utf-8", newline="") as f:
-        verdicts = {(r["query_set"], r["query_id"]): r for r in csv.DictReader(f)}
+    """Every query with its similarity, answer check and (if similarity >= 0.75) verdicts.
+
+    The TF-IDF baseline has no verdicts: it is only run without a verifier.
+    """
+    verdicts = {}
+    if model != "tfidf":
+        with (OUT / f"verdicts_{model}.csv").open(encoding="utf-8", newline="") as f:
+            verdicts = {(r["query_set"], r["query_id"]): r for r in csv.DictReader(f)}
     with (OUT / f"nearest_{model}.csv").open(encoding="utf-8", newline="") as f:
         rows = list(csv.DictReader(f))
     by_set = {}
     for r in rows:
         sim = float(r["similarity"])
         v = verdicts.get((r["query_set"], r["query_id"]))
-        assert v is not None or sim < THRESHOLDS[0], f"missing verdict for {r['query_id']}"
+        assert model == "tfidf" or v is not None or sim < THRESHOLDS[0], f"missing verdict for {r['query_id']}"
         by_set.setdefault(r["query_set"], []).append({
             "similarity": sim,
             "answer_correct": r["answer_correct"] == "True",
@@ -70,10 +80,10 @@ def rates(queries, verifier, t):
     return len(served), wrong
 
 
-def cost_rows(model, by_set):
+def cost_rows(model, by_set, verifiers=VERIFIERS, thresholds=THRESHOLDS):
     out = []
-    for verifier in VERIFIERS:
-        for t in THRESHOLDS:
+    for verifier in verifiers:
+        for t in thresholds:
             row = {"model": model, "verifier": verifier, "threshold": t}
             para = by_set["paraphrase"]
             served, wrong = rates(para, verifier, t)
@@ -103,26 +113,28 @@ def safe_thresholds(costs):
     bound at that same threshold, so the gap between the two is visible.
     """
     out = []
-    for model in MODELS:
-        for verifier in VERIFIERS:
-            series = [r for r in costs if r["model"] == model and r["verifier"] == verifier]
-            for d in D_SCENARIOS:
-                point, cons = f"wrong_per_1000_d{d}", f"wrong_per_1000_d{d}_conservative"
-                row = {"model": model, "verifier": verifier, "d": d}
-                for mode, col in (("point", point), ("conservative", cons)):
-                    ok = [r for r in series if r[col] <= BUDGET]
-                    best = max(ok, key=lambda r: (r["calls_saved_per_1000"], -r["threshold"]), default=None)
-                    row[f"{mode}_safe_threshold"] = best["threshold"] if best else "none"
-                    row[f"{mode}_calls_saved_per_1000"] = round(best["calls_saved_per_1000"], 1) if best else 0.0
-                    row[f"{mode}_wrong_per_1000"] = round(best[col], 2) if best else ""
-                    if mode == "point":
-                        row["point_conservative_wrong_per_1000"] = round(best[cons], 2) if best else ""
-                out.append(row)
+    for model, verifier in dict.fromkeys((r["model"], r["verifier"]) for r in costs):
+        series = [r for r in costs if r["model"] == model and r["verifier"] == verifier]
+        for d in D_SCENARIOS:
+            point, cons = f"wrong_per_1000_d{d}", f"wrong_per_1000_d{d}_conservative"
+            row = {"model": model, "verifier": verifier, "d": d}
+            for mode, col in (("point", point), ("conservative", cons)):
+                ok = [r for r in series if r[col] <= BUDGET]
+                best = max(ok, key=lambda r: (r["calls_saved_per_1000"], -r["threshold"]), default=None)
+                row[f"{mode}_safe_threshold"] = best["threshold"] if best else "none"
+                row[f"{mode}_calls_saved_per_1000"] = round(best["calls_saved_per_1000"], 1) if best else 0.0
+                row[f"{mode}_wrong_per_1000"] = round(best[col], 2) if best else ""
+                if mode == "point":
+                    row["point_conservative_wrong_per_1000"] = round(best[cons], 2) if best else ""
+            out.append(row)
     return out
 
 
-def figure(costs):
-    """One panel per verifier: mean near-duplicate error vs paraphrase served rate."""
+def figure(costs, exact):
+    """One panel per verifier: mean near-duplicate error vs paraphrase served rate.
+
+    The no-verifier panel also shows both baselines.
+    """
     fig, axes = plt.subplots(1, 4, figsize=(14, 4.4), facecolor=SURFACE, sharey=True)
     titles = {"none": "no verifier", "rule": "rule guard", "judge": "LLM judge", "both": "rule guard + LLM judge"}
     for k, (ax, verifier) in enumerate(zip(axes, VERIFIERS)):
@@ -132,16 +144,23 @@ def figure(costs):
         # Budget lines: with no paraphrase errors, wrong <= 1 per 1,000 means mean error <= 1/D.
         for d in D_SCENARIOS:
             ax.axhline(BUDGET / d, color=MUTED, linewidth=0.8, linestyle=(0, (3, 3)))
-        for model, st in MODEL_STYLE.items():
+        styles = dict(MODEL_STYLE, tfidf=TFIDF_STYLE) if verifier == "none" else MODEL_STYLE
+        for model, st in styles.items():
             s = [r for r in costs if r["model"] == model and r["verifier"] == verifier]
             ax.plot([r["paraphrase_served_rate"] for r in s], [r["mean_error_rate"] for r in s],
                     color=st["color"], linewidth=2, label=st["label"])
-    axes[0].legend(frameon=False, fontsize=9, labelcolor=INK, loc="upper left")
+        if verifier == "none":
+            ax.plot(exact["paraphrase_served_rate"], exact["mean_error_rate"], "s", markersize=8,
+                    color=INK, markeredgecolor=SURFACE, markeredgewidth=1.5, label="exact match")
+    # The legend sits in the empty upper area of the rule-guard panel, clear of every line.
+    handles, labels = axes[0].get_legend_handles_labels()
+    axes[1].legend(handles, labels, frameon=False, fontsize=9, labelcolor=INK, loc="upper left")
     fig.suptitle("Verifiers move the frontier down: savings vs errors on near-duplicates "
-                 "(thresholds 0.75–0.98; equal category weights)",
+                 "(equal category weights)",
                  color=INK, fontsize=12, x=0.01, ha="left")
     fig.text(0.01, 0.01, "Dashed lines (top to bottom): the most mean error that keeps wrong answers within "
-             "1 per 1,000 queries for D = 10, 50, 100 near-duplicates per 1,000 (illustrative).",
+             "1 per 1,000 queries for D = 10, 50, 100 near-duplicates per 1,000 (illustrative). "
+             "Thresholds: 0.75–0.98 for the embedding models, 0.30–0.98 for TF-IDF.",
              color=INK_2, fontsize=8)
     fig.tight_layout(rect=(0, 0.04, 1, 0.94))
     return fig
@@ -151,12 +170,17 @@ def main():
     costs = []
     for model in MODELS:
         costs += cost_rows(model, load(model))
+    costs += cost_rows("tfidf", load("tfidf"), verifiers=["none"], thresholds=TFIDF_THRESHOLDS)
+    with (OUT / "baseline_exact.csv").open(encoding="utf-8", newline="") as f:
+        by_set = {r["query_set"]: r for r in csv.DictReader(f)}
+    exact = {"paraphrase_served_rate": float(by_set["paraphrase"]["hit_rate"]),
+             "mean_error_rate": sum(float(by_set[c]["error_rate"]) for c in CATEGORIES) / len(CATEGORIES)}
     write_csv(OUT / "costs.csv", costs)
     safe = safe_thresholds(costs)
     write_csv(OUT / "safe_thresholds.csv", safe)
 
     FIGS.mkdir(parents=True, exist_ok=True)
-    fig = figure(costs)
+    fig = figure(costs, exact)
     path = FIGS / "verifier_frontier.png"
     fig.savefig(path, dpi=160, facecolor=SURFACE)
     plt.close(fig)
@@ -172,6 +196,8 @@ def main():
         cons = ("none" if s["conservative_safe_threshold"] == "none" else
                 f"t={s['conservative_safe_threshold']:<5} saved {s['conservative_calls_saved_per_1000']:5.1f}")
         print(f"  {s['model']:<7}{s['verifier']:<9}{s['d']:>4}   {point:<40}{cons}")
+    print(f"  exact-match baseline: saves {R * exact['paraphrase_served_rate']:.1f} calls, "
+          f"mean error {exact['mean_error_rate']:.3f}")
     print(f"\nWrote {OUT / 'costs.csv'} ({len(costs)} rows), {OUT / 'safe_thresholds.csv'}, {path}")
 
 

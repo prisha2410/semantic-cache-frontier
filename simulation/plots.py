@@ -2,7 +2,8 @@
 
     results/figures/frontier.png         cost-correctness frontier: adversarial error
                                          rate vs paraphrase hit rate (savings), one panel
-                                         per category, one line per model
+                                         per category, one line per model, plus the
+                                         TF-IDF baseline (results/sweep_tfidf.csv)
     results/figures/threshold_sweep.png  paraphrase hit rate and each category's error
                                          rate vs threshold, with 95% Wilson intervals
 
@@ -26,14 +27,19 @@ MODEL_STYLE = {
     "minilm": {"color": "#2a78d6", "label": "MiniLM (small)"},
     "mpnet": {"color": "#eb6834", "label": "MPNet (stronger)"},
 }
+# Baseline, slot 3 (the first three slots validate as a set). Frontier figure only:
+# its thresholds run 0.30-0.98, so it does not share the threshold-sweep x-axis.
+BASELINE_STYLE = {"tfidf": {"color": "#1baf7a", "label": "TF-IDF baseline (word overlap)"}}
 INK, INK_2, MUTED, GRID, AXIS, SURFACE = "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7", "#fcfcfb"
 CATEGORIES = ["number", "entity", "comparative", "unit", "negation"]
 MARKED_THRESHOLDS = [0.85, 0.90, 0.95]
 
 
 def load_sweep():
-    with (RESULTS / "sweep.csv").open(encoding="utf-8", newline="") as f:
-        rows = list(csv.DictReader(f))
+    rows = []
+    for name in ("sweep.csv", "sweep_tfidf.csv"):
+        with (RESULTS / name).open(encoding="utf-8", newline="") as f:
+            rows += list(csv.DictReader(f))
     data = {}
     for r in rows:
         key = (r["model"], r["query_set"])
@@ -66,25 +72,28 @@ def frontier(data):
         n = int(data[("minilm", cat)][0]["n"])
         style_axes(ax, f"{cat}  (n = {n})", "paraphrase hit rate (savings)", "error rate on near-duplicates")
         ax.set_xlim(-0.02, 1.02)
-        for model, st in MODEL_STYLE.items():
+        for model, st in {**MODEL_STYLE, **BASELINE_STYLE}.items():
             para = data[(model, "paraphrase")]
             adv = data[(model, cat)]
             x = [p["hit_rate"] for p in para]
             y = [a["error_rate"] for a in adv]
             ax.plot(x, y, color=st["color"], linewidth=2, label=st["label"])
+            if model in BASELINE_STYLE:
+                continue
             for t in MARKED_THRESHOLDS:
                 i = next(k for k, p in enumerate(para) if abs(p["threshold"] - t) < 1e-9)
                 ax.plot(x[i], y[i], "o", markersize=6, color=st["color"],
                         markeredgecolor=SURFACE, markeredgewidth=1.5)
-    # Direct labels where the two lines are furthest apart (comparative panel).
-    for model, (x, y, ha) in {"mpnet": (0.36, 0.62, "right"), "minilm": (0.62, 0.22, "left")}.items():
-        axes[2].text(x, y, MODEL_STYLE[model]["label"], color=INK_2, fontsize=8, ha=ha)
+    # Direct labels where the baseline and the models are furthest apart (entity panel).
+    axes[1].text(0.43, 0.50, "TF-IDF baseline", color=INK_2, fontsize=8, ha="right")
+    axes[1].text(0.58, 0.05, "both embedding models", color=INK_2, fontsize=8, ha="center")
     legend_ax = axes[-1]
     legend_ax.axis("off")
     handles, labels = axes[0].get_legend_handles_labels()
     legend_ax.legend(handles, labels, loc="upper left", frameon=False, fontsize=10, labelcolor=INK)
     legend_ax.text(0.0, 0.62,
-                   "Each line traces thresholds 0.75 (right) to 0.98 (left).\n"
+                   "Each line traces thresholds 0.75 (right) to 0.98 (left);\n"
+                   "the TF-IDF line runs 0.30 to 0.98.\n"
                    "Dots mark t = 0.95, 0.90, 0.85 (left to right).\n"
                    "Lower-right is better: more savings, fewer errors.\n"
                    "Error rate = share of near-duplicate queries that\n"

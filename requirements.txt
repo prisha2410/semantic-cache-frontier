@@ -10,3 +10,4 @@ transformers==5.22.0
 sentencepiece==0.2.2
 sentence-transformers==6.2.0
 matplotlib==3.11.2
+scikit-learn==1.9.1
