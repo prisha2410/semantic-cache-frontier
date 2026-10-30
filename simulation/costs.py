@@ -50,7 +50,7 @@ def accepts(verifier, row):
 
 
 def load(model):
-    """Every query with its similarity, answer check and (if similarity >= 0.75) verdicts.
+    """Every query with its similarity, answer check and (if similarity >= 0.50) verdicts.
 
     The TF-IDF baseline has no verdicts: it is only run without a verifier.
     """
@@ -161,7 +161,7 @@ def figure(costs, exact):
                  color=INK, fontsize=12, x=0.01, ha="left")
     fig.text(0.01, 0.01, "Dashed lines (top to bottom): the most mean error that keeps wrong answers within "
              "1 per 1,000 queries for D = 10, 50, 100 near-duplicates per 1,000 (illustrative). "
-             "Thresholds: 0.75–0.98 for the embedding models, 0.30–0.98 for TF-IDF.",
+             "Thresholds: 0.50–0.98 for the embedding models, 0.30–0.98 for TF-IDF.",
              color=INK_2, fontsize=8)
     fig.tight_layout(rect=(0, 0.04, 1, 0.94))
     return fig

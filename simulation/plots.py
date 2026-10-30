@@ -92,7 +92,7 @@ def frontier(data):
     handles, labels = axes[0].get_legend_handles_labels()
     legend_ax.legend(handles, labels, loc="upper left", frameon=False, fontsize=10, labelcolor=INK)
     legend_ax.text(0.0, 0.62,
-                   "Each line traces thresholds 0.75 (right) to 0.98 (left);\n"
+                   "Each line traces thresholds 0.50 (right) to 0.98 (left);\n"
                    "the TF-IDF line runs 0.30 to 0.98.\n"
                    "Dots mark t = 0.95, 0.90, 0.85 (left to right).\n"
                    "Lower-right is better: more savings, fewer errors.\n"
@@ -123,7 +123,7 @@ def threshold_sweep(data):
     # Direct labels where the lines separate (comparative panel).
     axes[3].text(0.885, 0.42, MODEL_STYLE["minilm"]["label"], color=INK_2, fontsize=8, ha="right")
     axes[3].text(0.925, 0.80, MODEL_STYLE["mpnet"]["label"], color=INK_2, fontsize=8, ha="left")
-    fig.suptitle("Threshold sweep (0.75–0.98); shaded bands are 95% Wilson intervals",
+    fig.suptitle("Threshold sweep (0.50–0.98); shaded bands are 95% Wilson intervals",
                  color=INK, fontsize=13, x=0.01, ha="left")
     fig.tight_layout(rect=(0, 0, 1, 0.96))
     return fig

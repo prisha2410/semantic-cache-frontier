@@ -26,15 +26,15 @@
     }
   },
   "judge_vs_scorer_all_served_pairs": {
-    "n": 1723,
-    "agree": 1480,
-    "agreement": 0.859,
-    "kappa": 0.454,
+    "n": 1792,
+    "agree": 1534,
+    "agreement": 0.856,
+    "kappa": 0.493,
     "table": {
-      "judge=yes, scorer=correct": 1344,
+      "judge=yes, scorer=correct": 1362,
       "judge=yes, scorer=wrong": 44,
-      "judge=no, scorer=correct": 199,
-      "judge=no, scorer=wrong": 136
+      "judge=no, scorer=correct": 214,
+      "judge=no, scorer=wrong": 172
     }
   },
   "disagreements_scorer": []

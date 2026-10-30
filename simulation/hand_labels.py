@@ -40,13 +40,19 @@ CHECK = OUT / "hand_label_check.json"
 ADVERSARIAL = ["number", "entity", "comparative", "unit", "negation"]
 
 
-def unique_pairs():
-    """Served pairs (similarity >= 0.75) from both models, each pair once."""
+def unique_pairs(min_similarity=0.0):
+    """Judged pairs from both models, each pair once.
+
+    The labelling sample was drawn from pairs with similarity >= 0.75, the sweep's
+    lower end at the time; draw_sample keeps that cut so the sample stays the same
+    after the sweep was extended down to 0.50.
+    """
     pairs = {}
     for model in ("minilm", "mpnet"):
         with (OUT / f"verdicts_{model}.csv").open(encoding="utf-8", newline="") as f:
             for r in csv.DictReader(f):
-                pairs.setdefault((r["query"], r["nearest_question"]), r)
+                if float(r["similarity"]) >= min_similarity:
+                    pairs.setdefault((r["query"], r["nearest_question"]), r)
     return list(pairs.values())
 
 
@@ -67,7 +73,7 @@ def draw_sample(pairs):
 
 
 def sample():
-    picked = draw_sample(unique_pairs())
+    picked = draw_sample(unique_pairs(min_similarity=0.75))
     with SHEET.open("w", encoding="utf-8-sig", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(["label_id", "query", "reference_answer", "cached_question", "cached_answer",

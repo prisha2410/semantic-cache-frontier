@@ -7,14 +7,14 @@
     "dtype": "bfloat16"
   },
   "unparsed_answer": "counted as reject",
-  "min_similarity_checked": 0.75,
+  "min_similarity_checked": 0.5,
   "versions": {
     "python": "3.12.10",
     "torch": "2.15.0+cu132",
     "transformers": "5.22.0"
   },
   "device": "NVIDIA GeForce RTX 3050 A Laptop GPU",
-  "this_run_seconds": 143.6,
+  "this_run_seconds": 6.0,
   "accept_rates": {
     "minilm": {
       "comparative": {
@@ -24,9 +24,9 @@
         "judge_unparsed": 0
       },
       "entity": {
-        "pairs": 11,
-        "rule_accept": 1.0,
-        "judge_accept": 0.091,
+        "pairs": 37,
+        "rule_accept": 0.892,
+        "judge_accept": 0.027,
         "judge_unparsed": 0
       },
       "negation": {
@@ -36,15 +36,15 @@
         "judge_unparsed": 0
       },
       "number": {
-        "pairs": 35,
+        "pairs": 36,
         "rule_accept": 0.0,
         "judge_accept": 0.0,
         "judge_unparsed": 0
       },
       "paraphrase": {
-        "pairs": 1493,
-        "rule_accept": 0.865,
-        "judge_accept": 0.883,
+        "pairs": 1573,
+        "rule_accept": 0.851,
+        "judge_accept": 0.865,
         "judge_unparsed": 0
       },
       "unit": {
@@ -62,9 +62,9 @@
         "judge_unparsed": 0
       },
       "entity": {
-        "pairs": 10,
-        "rule_accept": 1.0,
-        "judge_accept": 0.1,
+        "pairs": 41,
+        "rule_accept": 0.927,
+        "judge_accept": 0.024,
         "judge_unparsed": 0
       },
       "negation": {
@@ -80,13 +80,13 @@
         "judge_unparsed": 0
       },
       "paraphrase": {
-        "pairs": 1519,
-        "rule_accept": 0.859,
-        "judge_accept": 0.874,
+        "pairs": 1573,
+        "rule_accept": 0.851,
+        "judge_accept": 0.865,
         "judge_unparsed": 0
       },
       "unit": {
-        "pairs": 29,
+        "pairs": 30,
         "rule_accept": 0.0,
         "judge_accept": 0.0,
         "judge_unparsed": 0

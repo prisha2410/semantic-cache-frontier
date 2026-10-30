@@ -1,7 +1,7 @@
 """Step 8a: run both verifiers on every query's nearest cached question.
 
 A verifier only matters when the cache would serve a hit, so we check the
-pairs with similarity >= the lowest threshold we sweep (0.75). Whether a
+pairs with similarity >= the lowest threshold we sweep (0.50). Whether a
 verifier accepts a pair does not depend on the threshold, so one run covers
 the whole sweep.
 
@@ -15,7 +15,7 @@ Verifiers:
 
 Output:
     results/verdicts_minilm.csv, results/verdicts_mpnet.csv
-        the nearest_<model>.csv columns for pairs with similarity >= 0.75, plus
+        the nearest_<model>.csv columns for pairs with similarity >= 0.50, plus
         rule_accept, rule_reason, judge_raw, judge_accept
     results/judge_cache.jsonl   one line per unique (query, cached question) pair,
                                 so the run can be stopped and resumed, and a pair
@@ -45,7 +45,7 @@ CACHE_FILE = RESULTS / "judge_cache.jsonl"
 META_FILE = RESULTS / "verify_meta.json"
 
 MODELS = ["minilm", "mpnet"]
-MIN_THRESHOLD = 0.75
+MIN_THRESHOLD = 0.50
 
 JUDGE_MODEL = "Qwen/Qwen2.5-1.5B-Instruct"
 MAX_NEW_TOKENS = 3
@@ -209,7 +209,7 @@ def main():
 
 
 def print_summary(summary):
-    print("\nShare of pairs accepted (similarity >= 0.75):")
+    print(f"\nShare of pairs accepted (similarity >= {MIN_THRESHOLD}):")
     for model, sets in summary.items():
         print(f"  {model}")
         for qs, s in sets.items():

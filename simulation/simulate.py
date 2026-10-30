@@ -33,7 +33,7 @@ EMB = DATA / "embeddings"
 OUT = REPO / "results"
 
 MODELS = ["minilm", "mpnet"]
-THRESHOLDS = [round(0.75 + 0.01 * i, 2) for i in range(24)]  # 0.75 ... 0.98
+THRESHOLDS = [round(0.50 + 0.01 * i, 2) for i in range(49)]  # 0.50 ... 0.98
 QUERY_SETS = ["paraphrase", "number", "entity", "comparative", "unit", "negation"]
 
 
